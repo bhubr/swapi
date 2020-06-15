@@ -1,10 +1,16 @@
 import os
 import dj_database_url
+from sqlalchemy.engine.url import make_url
 
 # Print env vars
 print "Database URL: "
 print os.environ.get('DATABASE_URL', None)
+db_url = make_url(os.environ.get('DATABASE_URL', None))
+print db_url.username, db_url.password, db_url.host, db_url.port, db_url.database
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 
 SECRET_KEY = os.environ.get(
     'SECRET_KEY',
