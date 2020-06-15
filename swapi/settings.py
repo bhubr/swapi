@@ -11,6 +11,8 @@ SECRET_KEY = os.environ.get(
 )
 
 DEBUG = bool(os.environ.get('DEBUG', True))
+print "DEBUG: "
+print DEBUG
 # Because test settings will trigger KEEN.io hits
 KEEN_DEBUG = bool(os.environ.get('DEBUG', True))
 
