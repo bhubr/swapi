@@ -1,6 +1,9 @@
 import os
 import dj_database_url
 
+# Print env vars
+print "Database URL: "
+print os.environ.get('DATABASE_URL', None)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = os.environ.get(
