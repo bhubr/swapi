@@ -2,13 +2,6 @@ import os
 import dj_database_url
 from sqlalchemy.engine.url import make_url
 
-# Print env vars
-print "Database URL: "
-print os.environ.get('DATABASE_URL', None)
-db_url = make_url(os.environ.get('DATABASE_URL', None))
-print db_url.username, db_url.password, db_url.host, db_url.port, db_url.database
-
-
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -75,6 +68,12 @@ if not DEBUG:
     DATABASES['default'] =  dj_database_url.config()
 
     DATABASES['default']['ENGINE'] = 'django_postgrespool'
+    db_url = make_url(os.environ.get('DATABASE_URL', None))
+    DATABASES['default']['HOST'] = db_url.host
+    DATABASES['default']['NAME'] = db_url.database
+    DATABASES['default']['USER'] = db_url.username
+    DATABASES['default']['PASSWORD'] = db_url.password
+    DATABASES['default']['PORT'] = db_url.port
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
